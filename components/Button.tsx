@@ -11,11 +11,12 @@ import { FC } from "react";
 type ButtonProps = {
   text: string;
   outerStyles?: ViewProps["style"];
+  onPress: () => void;
 };
 
-const Button: FC<ButtonProps> = ({ text, outerStyles }) => {
+const Button: FC<ButtonProps> = ({ text, outerStyles, onPress }) => {
   return (
-    <TouchableOpacity style={[styles.button, outerStyles]}>
+    <TouchableOpacity style={[styles.button, outerStyles]} onPress={onPress}>
       <Text style={styles.btnText}>{text}</Text>
     </TouchableOpacity>
   );

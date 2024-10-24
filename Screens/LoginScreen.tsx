@@ -17,15 +17,11 @@ import Button from "../components/Button";
 
 const { width: screenWidth, height: screenHeight } = Dimensions.get("screen");
 
-const RegistrationScreen = () => {
-  const [name, setName] = useState("");
+const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isSecure, setIsSecure] = useState(true);
 
-  const handleNameChange = (value: string) => {
-    setName(value);
-  };
   const handleEmailChange = (value: string) => {
     setEmail(value);
   };
@@ -35,10 +31,8 @@ const RegistrationScreen = () => {
   const showPassword = () => {
     setIsSecure((prev) => !prev);
   };
-  const handleRegistration = () => {
-    console.log(
-      `RegistrationData: name: ${name}, email: ${email}, password: ${password}`
-    );
+  const handleLogin = () => {
+    console.log(`LoginData: email: ${email}, password: ${password}`);
   };
   const passwordShow = (
     <TouchableOpacity onPress={showPassword}>
@@ -59,14 +53,8 @@ const RegistrationScreen = () => {
       >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={styles.inner}>
-            <View style={styles.photoContainer}></View>
-            <Text style={styles.title}>Реєстрація</Text>
+            <Text style={styles.title}>Увійти</Text>
             <View style={styles.inputContainer}>
-              <InputField
-                placeholder="Логін"
-                value={name}
-                onValueChange={handleNameChange}
-              />
               <InputField
                 placeholder="Адреса електронної пошти"
                 value={email}
@@ -83,8 +71,10 @@ const RegistrationScreen = () => {
             </View>
 
             <View style={styles.buttonContainer}>
-              <Button text="Зареєстуватися" onPress={handleRegistration} />
-              <Text style={styles.toLoginBtn}>Вже є акаунт? Увійти</Text>
+              <Button text="Увійти" onPress={handleLogin} />
+              <Text style={styles.toLoginBtn}>
+                Немає аккаунту? Зареєструватися
+              </Text>
             </View>
           </View>
         </TouchableWithoutFeedback>
@@ -93,7 +83,7 @@ const RegistrationScreen = () => {
   );
 };
 
-export default RegistrationScreen;
+export default LoginScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -112,21 +102,11 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
   },
   inner: {
+    height: 490,
     paddingHorizontal: 16,
-    paddingBottom: 80,
     backgroundColor: colors.white,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
-    paddingTop: 92,
-  },
-  photoContainer: {
-    position: "absolute",
-    alignSelf: "center",
-    top: -60,
-    width: 120,
-    height: 120,
-    backgroundColor: colors.inputBackground,
-    borderRadius: 16,
   },
   title: {
     color: colors.darkText,
@@ -134,7 +114,7 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     lineHeight: 35,
     textAlign: "center",
-    marginBottom: 32,
+    marginVertical: 32,
   },
   inputContainer: {
     gap: 16,
